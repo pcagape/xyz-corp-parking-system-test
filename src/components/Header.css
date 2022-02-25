@@ -1,0 +1,44 @@
+.header-container {
+    display: flex;
+    background-color: black;
+    position: fixed;
+    width: 100%;
+    height: 40px;
+    align-items: center;
+    justify-content: start;
+}
+
+.header-container input.header-input {
+    margin-left: 5px;
+}
+
+.header-container .header-time {
+    position: absolute;
+    right: 5px;
+    color: white;
+}
+
+.header-container .header-time-btn {
+    width: 35px;
+    position:absolute;
+}
+
+.header-container .header-time-label {
+    position:absolute;
+    left: 41%;
+    color: white;
+}
+
+.header-container .header-time-btn.btn1 {
+    left: 47%;
+}
+.header-container .header-time-btn.btn2 {
+    left: 50%;
+}
+.header-container .header-time-btn.btn3 {
+    left: 53%;
+}
+
+.header-container .header-time-btn.SELECTED {
+    background-color: green;
+}

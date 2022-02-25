@@ -1,0 +1,131 @@
+.parksystem-container,
+.parksystem-container .parking-layout {
+    width: 100%;
+    height: 100%;
+}
+
+.parklot-gate {
+    cursor: pointer;
+    position: absolute;
+    border-radius: 10px;
+    border: 1px solid black;
+    color: white;
+    background-color: rgb(40, 40, 236);
+    height: 100px;
+    width: 100px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+.arrow {
+    position: absolute;
+    font-size: 70px;
+}
+
+.arrow.arrow1 {
+    left: 450px;
+    top: 210px;
+}
+.arrow.arrow2 {
+    left: 1100px;
+    top: 210px;
+}
+.arrow.arrow3 {
+    left: 450px;
+    top: 490px;
+}
+.arrow.arrow4 {
+    left: 1100px;
+    top: 490px;
+}
+.arrow.arrow5 {
+    left: 273px;
+    top: 350px;
+}
+.arrow.arrow6 {
+    left: 1375px;
+    top: 350px;
+}
+.arrow.arrow7 {
+    left: 300px;
+    top: 100px;
+}
+.arrow.arrow8 {
+    left: 250px;
+    top: 100px;
+}
+.arrow.arrow9 {
+    left: 175px;
+    top: 520px;
+}
+.arrow.arrow10 {
+    left: 175px;
+    top: 470px;
+}
+.arrow.arrow11 {
+    left: 1415px;
+    top: 240px;
+}
+.arrow.arrow12 {
+    left: 1415px;
+    top: 200px;
+}
+
+.parklot-gate h4{
+    cursor: pointer;
+}
+
+.parklot-gate.gate-a{
+    top: 60%;
+    left: 5%;
+}
+
+.parklot-gate.gate-b{
+    top: 9%;
+    left: 14.4%;
+}
+
+.parklot-gate.gate-c{
+    top: 29%;
+    left: 87%;
+}
+
+.parklot {
+    position: absolute;
+    border: 1px solid black;
+    display: flex;
+}
+
+.parklot:not(.OCCUPIED) {
+    background-color: green;
+}
+
+.parklot.OCCUPIED {
+    cursor: pointer;
+    background-color: red;
+}
+
+.parklot.OCCUPIED label{
+    cursor: pointer;
+}
+
+.parklot label {
+    font-size: 60%;
+}
+
+.parklot.VERTICAL {
+    height: 60px;
+    width: 20px;
+    flex-direction: column;
+}
+
+.parklot.HORIZONTAL {
+    height: 20px;
+    width: 60px;
+    flex-direction: row;
+}
+
+.parklot.HORIZONTAL label {
+    margin-left: 5px;
+}
