@@ -32,8 +32,7 @@ const _AREA_F_TYPE = 'HORIZONTAL';
 function ParkingSystem ({ currTime, waitingCar, setSelectedGate }) {
     const [carRecords, setCarRecords] = useState({});
     const [parkingLots, setParkingLots] = useState([]);
-    const [_hIdx, set_hIdx_hIdx] = useState(-1);
-    const [_tOrder, set_tOrder] = useState([]);
+    const [_hIdx] = useState(-1);
     const [_GATE_A_ORDER, setGAO] = useState([]);
     const [_GATE_B_ORDER, setGBO] = useState([]);
     const [_GATE_C_ORDER, setGCO] = useState([]);
@@ -114,10 +113,12 @@ function ParkingSystem ({ currTime, waitingCar, setSelectedGate }) {
     }, [waitingCar]);
 
     useEffect(() => {
+        var i = 0;
+        
         // _LARGE_PARKLOT counts
         var _parkingLots = [];
         const SP_COUNT = 100;
-        for(var i=0; i<SP_COUNT; i++)
+        for(i=0; i<SP_COUNT; i++)
         _parkingLots.push({
                 idx: _parkingLots.length,
                 lotNum: _parkingLots.length+1,
@@ -129,7 +130,7 @@ function ParkingSystem ({ currTime, waitingCar, setSelectedGate }) {
             });
         // _MEDIUM_PARKLOT counts
         const MP_COUNT = 120;
-        for(var i=0; i<MP_COUNT; i++)
+        for(i=0; i<MP_COUNT; i++)
             _parkingLots.push({
                 idx: _parkingLots.length,
                 lotNum: _parkingLots.length+1,
@@ -141,7 +142,7 @@ function ParkingSystem ({ currTime, waitingCar, setSelectedGate }) {
             });
         // _SMALL_PARKLOT counts
         const LP_COUNT = 31;
-        for(var i=0; i<LP_COUNT; i++)
+        for(i=0; i<LP_COUNT; i++)
             _parkingLots.push({
                 idx: _parkingLots.length,
                 lotNum: _parkingLots.length+1,
@@ -154,7 +155,7 @@ function ParkingSystem ({ currTime, waitingCar, setSelectedGate }) {
 
         // all indexs
         let _indexs = [];
-        for(var i=0; i<_parkingLots.length; i++)
+        for(i=0; i<_parkingLots.length; i++)
             _indexs.push(i);
 
         // assign parklot per AREA
@@ -163,7 +164,7 @@ function ParkingSystem ({ currTime, waitingCar, setSelectedGate }) {
         var realWidth = document.body.clientWidth;
         var totalWidth = _AREA_A_COUNT * _PARKLOT_WIDTH;
         let _AREA_A_LOTS = [];
-        for(var i=0; i<_AREA_A_COUNT; i++) {
+        for(i=0; i<_AREA_A_COUNT; i++) {
             idx = _indexs.shift();
             _parkingLots[idx].pos = {
                 x: realWidth*_AREA_A_CENTER_POS.x - totalWidth/2 + i*_PARKLOT_WIDTH,
@@ -174,7 +175,7 @@ function ParkingSystem ({ currTime, waitingCar, setSelectedGate }) {
         }
         totalWidth = _AREA_B_COUNT * _PARKLOT_WIDTH;
         let _AREA_B_LOTS = [];
-        for(var i=0; i<_AREA_B_COUNT; i++) {
+        for(i=0; i<_AREA_B_COUNT; i++) {
             idx = _indexs.shift();
             _parkingLots[idx].pos = {
                 x: realWidth*_AREA_B_CENTER_POS.x + totalWidth/2 - (i+1)*_PARKLOT_WIDTH,
@@ -185,7 +186,7 @@ function ParkingSystem ({ currTime, waitingCar, setSelectedGate }) {
         }
         totalWidth = _AREA_C_COUNT * _PARKLOT_WIDTH;
         let _AREA_C_LOTS = [];
-        for(var i=0; i<_AREA_C_COUNT; i++) {
+        for(i=0; i<_AREA_C_COUNT; i++) {
             idx = _indexs.shift();
             _parkingLots[idx].pos = {
                 x: realWidth*_AREA_C_CENTER_POS.x - totalWidth/2 + i*_PARKLOT_WIDTH,
@@ -196,7 +197,7 @@ function ParkingSystem ({ currTime, waitingCar, setSelectedGate }) {
         }
         totalWidth = _AREA_D_COUNT * _PARKLOT_WIDTH;
         let _AREA_D_LOTS = [];
-        for(var i=0; i<_AREA_D_COUNT; i++) {
+        for(i=0; i<_AREA_D_COUNT; i++) {
             idx = _indexs.shift();
             _parkingLots[idx].pos = {
                 x: realWidth*_AREA_D_CENTER_POS.x + totalWidth/2 - (i+1)*_PARKLOT_WIDTH,
@@ -207,7 +208,7 @@ function ParkingSystem ({ currTime, waitingCar, setSelectedGate }) {
         }
         var totalHeight = _AREA_E_COUNT * _PARKLOT_WIDTH;
         let _AREA_E_LOTS = [];
-        for(var i=0; i<_AREA_E_COUNT; i++) {
+        for(i=0; i<_AREA_E_COUNT; i++) {
             idx = _indexs.shift();
             _parkingLots[idx].pos = {
                 x: realWidth*_AREA_E_CENTER_POS.x,
@@ -218,7 +219,7 @@ function ParkingSystem ({ currTime, waitingCar, setSelectedGate }) {
         }
         totalHeight = _AREA_F_COUNT * _PARKLOT_WIDTH;
         let _AREA_F_LOTS = [];
-        for(var i=0; i<_AREA_F_COUNT; i++) {
+        for(i=0; i<_AREA_F_COUNT; i++) {
             idx = _indexs.shift();
             _parkingLots[idx].pos = {
                 x: realWidth*_AREA_F_CENTER_POS.x - _PARKLOT_HEIGHT,
@@ -228,9 +229,9 @@ function ParkingSystem ({ currTime, waitingCar, setSelectedGate }) {
             _AREA_F_LOTS.push(idx);
         }
 
-        setGAO([].concat(_AREA_A_LOTS).concat(_AREA_B_LOTS).concat(_AREA_C_LOTS).concat(_AREA_E_LOTS).concat(_AREA_D_LOTS).concat(_AREA_F_LOTS));
-        setGBO([].concat(_AREA_A_LOTS).concat(_AREA_B_LOTS).concat(_AREA_F_LOTS).concat(_AREA_C_LOTS).concat(_AREA_E_LOTS).concat(_AREA_D_LOTS));
-        setGCO([].concat(_AREA_B_LOTS).concat(_AREA_A_LOTS).concat(_AREA_D_LOTS).concat(_AREA_F_LOTS).concat(_AREA_C_LOTS).concat(_AREA_E_LOTS));
+        setGAO([..._AREA_A_LOTS, ..._AREA_B_LOTS, ..._AREA_C_LOTS, ..._AREA_E_LOTS, ..._AREA_D_LOTS, ..._AREA_F_LOTS]);
+        setGBO([..._AREA_A_LOTS, ..._AREA_B_LOTS, ..._AREA_F_LOTS, ..._AREA_C_LOTS, ..._AREA_E_LOTS, ..._AREA_D_LOTS]);
+        setGCO([..._AREA_B_LOTS, ..._AREA_A_LOTS, ..._AREA_D_LOTS, ..._AREA_F_LOTS, ..._AREA_C_LOTS, ..._AREA_E_LOTS]);
 
         // Default parking lot to State
         setParkingLots(_parkingLots);
