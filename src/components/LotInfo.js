@@ -104,7 +104,7 @@ function LotInfo({ isShow, currTime, selectedparkLot, setSelectedparkLot, parkOu
             lastParkDiff = lastParkDiff / 60; // Hours
         }
 
-        if(hourDiff < _FIRSTHOURS && lastParkDiff >= 1)
+        if(hourDiff <= _FIRSTHOURS && lastParkDiff >= 1)
             return _FIRSTHOURS_HOURLY_RATE;
         else return hourlyRate;
     }
@@ -129,9 +129,10 @@ function LotInfo({ isShow, currTime, selectedparkLot, setSelectedparkLot, parkOu
 
         // Below 24hrs
         if(hourDiff < 24 & lastParkDiff >= 1) {
-            let hrs = hourDiff - _FIRSTHOURS;
-            if(hourDiff < _FIRSTHOURS) return hourDiff*_FIRSTHOURS_HOURLY_RATE;
-            else return (_FIRSTHOURS*_FIRSTHOURS_HOURLY_RATE) + hrs*calculateHourlyRate();
+            let exceedHrs = Math.ceil(hourDiff - _FIRSTHOURS);
+            if(hourDiff <= _FIRSTHOURS)
+                return _FIRSTHOURS_HOURLY_RATE;
+            else return _FIRSTHOURS_HOURLY_RATE + exceedHrs*calculateHourlyRate();
         
         // Above 24hrs
         } else {
@@ -155,7 +156,7 @@ function LotInfo({ isShow, currTime, selectedparkLot, setSelectedparkLot, parkOu
                 <label>Car Size: <dfn>{getCarSize()}</dfn></label>
                 <label>Park at: <dfn>{selectedparkLot && selectedparkLot.parkStart ? dateToTimeString(selectedparkLot?.parkStart) : ''}</dfn></label>
                 <label>Hour/s Park: <dfn>{calculateHoursPark()}</dfn></label>
-                <label>Hourly Rate: <dfn>Php{calculateHourlyRate()}</dfn></label>
+                <label>{(calculateHourlyRate() === _FIRSTHOURS_HOURLY_RATE) ? `First ${_FIRSTHOURS}hours rate:` : "Hourly Rate:" } <dfn>Php{calculateHourlyRate()}</dfn></label>
                 <label>Total Fee: <dfn>Php{calculateTotalFee().toLocaleString()}</dfn></label>
             </div>
             <button className='btn-pay-out' onClick={()=>parkOutCar(selectedparkLot)}>Pay-Out</button>

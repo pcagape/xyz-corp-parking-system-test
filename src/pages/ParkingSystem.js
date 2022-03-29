@@ -85,6 +85,10 @@ function ParkingSystem ({ currTime, waitingCar, setSelectedGate }) {
         return false; // no space to park
     }
 
+    function setSelectedGateFn(gate) {
+        setSelectedGate(gate);
+    }
+
     function trySelectParkLot(parkLot) {
         if(!parkLot.carPlateNum) return;
 
@@ -95,7 +99,7 @@ function ParkingSystem ({ currTime, waitingCar, setSelectedGate }) {
     // update on waitingCar change / Trigger add new car
     useEffect(() => {
         if(!waitingCar.carPlateNum || waitingCar.carPlateNum.length < 1) return;
-
+        
         // Fetch stored car data
         if(carRecords[waitingCar.carPlateNum])
             waitingCar = carRecords[waitingCar.carPlateNum];
@@ -125,8 +129,6 @@ function ParkingSystem ({ currTime, waitingCar, setSelectedGate }) {
                 type: _LARGE_PARKLOT,
                 pos: null,
                 carPlateNum: null,
-                start: null,
-                end: null
             });
         // _MEDIUM_PARKLOT counts
         const MP_COUNT = 120;
@@ -136,9 +138,7 @@ function ParkingSystem ({ currTime, waitingCar, setSelectedGate }) {
                 lotNum: _parkingLots.length+1,
                 type: _MEDIUM_PARKLOT,
                 pos: null,
-                carPlateNum: null,
-                start: null,
-                end: null
+                carPlateNum: null
             });
         // _SMALL_PARKLOT counts
         const LP_COUNT = 31;
@@ -148,9 +148,7 @@ function ParkingSystem ({ currTime, waitingCar, setSelectedGate }) {
                 lotNum: _parkingLots.length+1,
                 type: _SMALL_PARKLOT,
                 pos: null,
-                carPlateNum: null,
-                start: null,
-                end: null
+                carPlateNum: null
             });    
 
         // all indexs
@@ -249,9 +247,9 @@ function ParkingSystem ({ currTime, waitingCar, setSelectedGate }) {
               );
           })}
 
-          <div className='parklot-gate gate-a' onClick={()=>setSelectedGate('A')}><h4>GATE A</h4></div>
-          <div className='parklot-gate gate-b' onClick={()=>setSelectedGate('B')}><h4>GATE B</h4></div>
-          <div className='parklot-gate gate-c' onClick={()=>setSelectedGate('C')}><h4>GATE C</h4></div>
+          <div className='parklot-gate gate-a' onClick={()=>setSelectedGateFn('A')}><h4>GATE A</h4></div>
+          <div className='parklot-gate gate-b' onClick={()=>setSelectedGateFn('B')}><h4>GATE B</h4></div>
+          <div className='parklot-gate gate-c' onClick={()=>setSelectedGateFn('C')}><h4>GATE C</h4></div>
 
             <h1 className='arrow arrow1'>&#8592;</h1>
             <h1 className='arrow arrow2'>&#8592;</h1>
